@@ -3,16 +3,37 @@ import TodoList from "components/TodoList";
 import NewTodo from "components/NewTodo";
 import { Todo } from "todo.model";
 const App: React.FC = () => {
-  const [todos, setTodos] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([
+    { id: "t1", text: "hi", done: false },
+  ]);
   const todoAddHandler = (text: string) => {
     setTodos((prevTodos) => [
       ...prevTodos,
-      { id: Math.random().toString(), text: text },
+      {
+        id: `t${Math.floor(Math.random() * 100 + 1).toString()}`,
+        text: text,
+        done: false,
+      },
     ]);
   };
 
   const todoDeleteHandler = (todoId: string) => {
-    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== todoId));
+    setTodos((prev) =>
+      prev.map((el) => {
+        if (el.id === todoId) {
+          return { ...el, done: !el.done };
+        } else {
+          return { ...el };
+        }
+      })
+    );
+    // todos.forEach((todo) => {
+    //   if (todo.id === todoId) {
+    //     document.querySelector(`.${todoId}`)!.classList.toggle("remove");
+    //   }
+    // });
+
+    // });
   };
   return (
     <div className="App">

@@ -15,3 +15,10 @@ li {
   justify-content: space-between;
   align-items: center;
 }
+.remove {
+  color: red;
+}
+
+.remove span {
+  text-decoration: line-through;
+}
